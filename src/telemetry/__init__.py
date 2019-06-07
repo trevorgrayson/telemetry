@@ -1,3 +1,4 @@
+import os
 from statsd_client import Statsd
 
 SERVICES = {
@@ -9,12 +10,12 @@ class Telemetry:
 
     def __init__(self):
       self._services = {
-        k: klass() for k, klass in SERVICES.items()
+        k: klass(os.environ.get(("%s_HOST" % k).upper())) for k, klass in SERVICES.items()
       }
         
     def service(self, name):
         return self._services[name]
 
-    def report(self, service_name, name, value):
-        self.service(service_name).report(name, value)
+    def gauge(self, service_name, name, value):
+        self.service(service_name).gauge(name, value)
 

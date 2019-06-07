@@ -1,5 +1,6 @@
-export PYTHONPATH = "src:venv"
-VIRTDIR=./venv
+export
+PYTHONPATH := "src:venv"
+VIRTDIR := ./venv
 
 virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
@@ -9,8 +10,12 @@ compile: virtualenv
 	@pip install -q -r requirements.txt
 
 test: compile
-	@PYTHONPATH=src python -m pytest
+# maybe use env command?
+	@PYTHONPATH=$(PYTHONPATH) python -m pytest
 
+clean:
+	find . -name "*.pyc" -delete
+	find . -name "*.sw*" -delete
 
 .EXPORT_ALL_VARIABLES:
-.PHONY: test
+.PHONY: test clean

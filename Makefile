@@ -1,7 +1,7 @@
 export
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
-VERSION := ${shell git tag -l v[0-9]* | sort -r | head -n1 |  awk '/v/{split($NF,v,/[.]/); $NF=v[1]"."v[2]"."v[3]}1'}
+VERSION := ${shell git tag -l v[0-9]* | sort -r | head -n1}
 VERSION_NEW := ${shell git tag -l v[0-9]* | sort -r | head -n1 |  awk '/v/{split($NF,v,/[.]/); $NF=v[1]"."v[2]"."++v[3]}1'}
 
 virtualenv:

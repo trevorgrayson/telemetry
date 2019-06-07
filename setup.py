@@ -1,7 +1,13 @@
+import subprocess
 from distutils.core import setup
 
 
 REQUIRED = ['statsd']
+
+
+git_proc = subprocess.Popen('bin/version', stdout=subprocess.PIPE, shell=True)
+(VERSION, err) = git_proc.communicate()
+git_proc.wait()
 
 EXTRAS = {
     # 'statsd': ['statsd']
@@ -9,7 +15,7 @@ EXTRAS = {
 
 setup(
     name='telemetry',
-    version='0.2.0',
+    version=VERSION,
     packages=['telemetry',],
     #package_dir={ 'telemetry': 'src/telemetry' },
     description='',

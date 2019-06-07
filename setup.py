@@ -43,7 +43,7 @@ setup(
         # 'Programming Language :: Python :: 3.6',
         # 'Programming Language :: Python :: Implementation :: CPython',
         # 'Programming Language :: Python :: Implementation :: PyPy'
-    ],
+    ]
 )
 
 # https://github.com/kennethreitz/setup.py/blob/master/setup.py

@@ -11,9 +11,7 @@ setup(
     name='telemetry',
     version='0.2.0',
     packages=['telemetry',],
-    package_dir={
-      'telemetry': 'src/telemetry'
-    },
+    #package_dir={ 'telemetry': 'src/telemetry' },
     description='',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -46,6 +44,6 @@ setup(
         # 'Programming Language :: Python :: Implementation :: CPython',
         # 'Programming Language :: Python :: Implementation :: PyPy'
     ],
-
-
 )
+
+# https://github.com/kennethreitz/setup.py/blob/master/setup.py

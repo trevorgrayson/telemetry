@@ -15,6 +15,6 @@ class TestTelemetry:
   def test_init(self, telem):
       assert(telem.service('statsd').__class__.__name__ == 'Statsd')
 
-  def test_report(self, telem):
-      telem.report('statsd', 'some.report.name', 123)
+  def test_gauge(self, telem):
+      telem.gauge('statsd', 'some.gauge.name', 123)
 

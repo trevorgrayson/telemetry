@@ -5,7 +5,7 @@ from distutils.core import setup
 REQUIRED = ['statsd']
 
 
-git_proc = subprocess.Popen('bin/version', stdout=subprocess.PIPE, shell=True)
+git_proc = subprocess.Popen('./bin/version', stdout=subprocess.PIPE, shell=True)
 (VERSION, err) = git_proc.communicate()
 git_proc.wait()
 

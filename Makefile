@@ -20,6 +20,7 @@ staging:
 publish:
 	rm -rf dist
 	git pull --tags
+	echo $(VERSION_NEW)
 	git tag $(VERSION_NEW)
 	python setup.py sdist
 	twine upload dist/*

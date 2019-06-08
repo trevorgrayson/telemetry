@@ -2,7 +2,10 @@ export
 TAGS := git pull --tags
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
-VERSION_NEW := $(shell ./bin/version_new)
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+MKDIR := $(dir $(mkfile_path))
+VERSION_NEW := $(shell $(MKDIR)/bin/version_new)
+
 
 virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
@@ -12,7 +15,7 @@ compile: virtualenv
 	@pip install -q -r requirements.txt
 
 test: compile
-# maybe use env command?
+	# maybe use env command?
 	@PYTHONPATH=$(PYTHONPATH) python -m pytest
 
 staging:

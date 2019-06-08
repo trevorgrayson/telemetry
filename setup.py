@@ -1,11 +1,13 @@
+import os
 import subprocess
 from distutils.core import setup
 
 
 REQUIRED = ['statsd']
 
+BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-git_proc = subprocess.Popen('./bin/version', stdout=subprocess.PIPE, shell=True)
+git_proc = subprocess.Popen(os.path.join(BIN_DIR, 'bin/version'), stdout=subprocess.PIPE, shell=True)
 (VERSION, err) = git_proc.communicate()
 git_proc.wait()
 

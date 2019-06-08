@@ -15,10 +15,13 @@ test: compile
 # maybe use env command?
 	@PYTHONPATH=$(PYTHONPATH) python -m pytest
 
+staging:
+	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 publish:
 	git pull --tags
-	python setup.py sdist upload
-	git tag $(VERSION)
+	python setup.py sdist
+	twine upload dist/*
+	git tag $(VERSION_NEW)
 	git push --tags
 
 clean:

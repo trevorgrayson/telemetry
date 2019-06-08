@@ -4,7 +4,7 @@ PYTHONPATH := "venv"
 VIRTDIR := ./venv
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 MKDIR := $(dir $(mkfile_path))
-VERSION_NEW := $(shell $(MKDIR)bin/version_new)
+VERSION_NEW := $(shell eval bin/version_new)
 
 
 virtualenv:
@@ -22,11 +22,12 @@ staging:
 	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 publish:
-	rm -rf dist
-	git tag "$(VERSION_NEW)"
-	python setup.py sdist
-	twine upload dist/*
-	git push --tags
+	echo $(VERSION_NEW)
+	# rm -rf dist
+	# git tag "$(VERSION_NEW)"
+	# python setup.py sdist
+	# twine upload dist/*
+	# git push --tags
 
 clean:
 	find . -name "*.pyc" -delete

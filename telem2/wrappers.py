@@ -3,9 +3,8 @@ import telemetry
 
 
 class report_time:
-    
-    def __init__(self, service, report_name):
-        self.service = service
+
+    def __init__(self, report_name):
         self.report_name = report_name
 
     def __call__(self, fn):
@@ -15,9 +14,7 @@ class report_time:
             end = timeit.timeit()
 
             elapsed = end - start
-            telemetry.get_client().gauge(self.service, 
-                                         self.report_name, 
-                                         elapsed)
+            telemetry.get_client().gauge(self.report_name, elapsed)
 
             return result
 

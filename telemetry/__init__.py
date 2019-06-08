@@ -19,3 +19,14 @@ class Telemeter:
     def gauge(self, service_name, name, value):
         self.service(service_name).gauge(name, value)
 
+
+_client = Telemeter()
+
+
+def set_client(client):
+    global _client
+    _client = client
+
+
+def get_client():
+    return _client

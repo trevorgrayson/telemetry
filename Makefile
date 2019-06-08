@@ -4,7 +4,7 @@ PYTHONPATH := "venv"
 VIRTDIR := ./venv
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 MKDIR := $(dir $(mkfile_path))
-VERSION_NEW := $(shell $(MKDIR)/bin/version_new)
+VERSION_NEW := $(shell $(MKDIR)bin/version_new)
 
 
 virtualenv:

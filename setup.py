@@ -23,7 +23,21 @@ setup(
     packages=['telemetry',],
     package_data={'': ['README.md']},
     #package_dir={ 'telemetry': 'src/telemetry' },
-    description='',
+    description="""
+Remote measuring abstraction for software applications.
+
+`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. statsd, graphite) 
+allowing the end user to plug in the desired telemetry framework at deployment time. Think [slf4j](https://www.slf4j.org/)
+but for events and numbers, not logs.  This library borrows from their example (and copy.)
+
+As your projects grow, their telemetry requirements will change.  The purpose of this library is to simplify
+implementation, provide easy configuration, encourage testing, and avoid vendor lock.
+
+
+## Supported Services:
+
+* statsd/graphite
+    """,
     # long_description=open('README.md').read(),
     # long_description_content_type="text/markdown",
     author='trevor grayson',

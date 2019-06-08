@@ -9,6 +9,8 @@ git_proc = subprocess.Popen('bin/version', stdout=subprocess.PIPE, shell=True)
 (VERSION, err) = git_proc.communicate()
 git_proc.wait()
 
+VERSION = VERSION.strip()
+
 EXTRAS = {
     # 'statsd': ['statsd']
 }
@@ -23,22 +25,20 @@ setup(
     long_description_content_type='text/markdown',
     author='trevor grayson',
     author_email='trevor@retentionscience.com',
-    python_requires='2.7', #todo
     url='http://github.com/trevorgrayson/telemetry',
 
     py_modules=['telemetry'],
 
-    entry_points={
-        'console_scripts': ['telemetry=telemetry:main'],
-    },
+    # entry_points={ },
 
-    install_requires=REQUIRED,
-    extras_require=EXTRAS,
-    include_package_data=True,
+    # python_requires='2.7', #todo
+    # install_requires=REQUIRED,
+    # extras_require=EXTRAS,
+    # include_package_data=True,
     license='MIT',
     classifiers=[
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 4',
+        # 'Development Status :: 4',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Topic :: Software Development :: Libraries',

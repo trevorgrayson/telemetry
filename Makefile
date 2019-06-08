@@ -16,9 +16,10 @@ test: compile
 	@PYTHONPATH=$(PYTHONPATH) python -m pytest
 
 publish:
-	python setup.py sdist # bdist_wheel # upload --universal
-	# git tag 0.2.0
-	# git push --tags
+	git pull --tags
+	python setup.py sdist upload
+	git tag 0.2.1
+	git push --tags
 
 clean:
 	find . -name "*.pyc" -delete

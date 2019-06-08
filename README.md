@@ -16,6 +16,7 @@ implementation, provide easy configuration, encourage testing, and avoid vendor 
 
 Furture Implementations
 
+* airbrake
 * elasticsearch
 * NewRelic Insights
 

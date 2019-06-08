@@ -22,7 +22,7 @@ setup(
     #package_dir={ 'telemetry': 'src/telemetry' },
     description='',
     long_description=open('README.md').read(),
-    long_description_content_type='text/markdown',
+    # long_description_content_type="text/markdown",
     author='trevor grayson',
     author_email='trevor@retentionscience.com',
     url='http://github.com/trevorgrayson/telemetry',

@@ -1,8 +1,7 @@
 export
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
-VERSION := ${shell git tag -l v[0-9]* | sort -r | head -n1}
-VERSION_NEW := ${shell git tag -l v[0-9]* | sort -r | head -n1 |  awk '/v/{split($NF,v,/[.]/); $NF=v[1]"."v[2]"."++v[3]}1'}
+VERSION_NEW := $(shell ./bin/version_new)
 
 virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
@@ -17,11 +16,13 @@ test: compile
 
 staging:
 	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
 publish:
+	rm -rf dist
 	git pull --tags
+	git tag $(VERSION_NEW)
 	python setup.py sdist
 	twine upload dist/*
-	git tag $(VERSION_NEW)
 	git push --tags
 
 clean:

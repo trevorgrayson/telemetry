@@ -2,7 +2,7 @@ export
 TAGS := git pull --tags
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
-VERSION_NEW := $(shell bin/version_new)
+VERSION_NEW := $(shell ./bin/version_new)
 
 virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)

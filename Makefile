@@ -18,7 +18,7 @@ test: compile
 publish:
 	git pull --tags
 	python setup.py sdist upload
-	git tag 0.2.1
+	git tag $(VERSION)
 	git push --tags
 
 clean:

@@ -1,7 +1,8 @@
 export
+TAGS := git pull --tags
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
-VERSION_NEW := $(shell ./bin/version_new)
+VERSION_NEW := $(shell bin/version_new)
 
 virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
@@ -19,9 +20,7 @@ staging:
 
 publish:
 	rm -rf dist
-	git pull --tags
-	echo $(VERSION_NEW)
-	git tag $(VERSION_NEW)
+	git tag "$(VERSION_NEW)"
 	python setup.py sdist
 	twine upload dist/*
 	git push --tags

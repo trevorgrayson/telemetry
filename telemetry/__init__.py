@@ -6,7 +6,7 @@ SERVICES = {
 }
 
 
-class Telemetry:
+class Telemeter:
 
     def __init__(self):
       self._services = {

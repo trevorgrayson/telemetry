@@ -8,7 +8,7 @@ class TestTelemetryWrappers:
   
   @fixture
   def telem(self):
-      return telemetry.Telemetry()
+      return telemetry.Telemeter()
 
   def test_constants(self, telem):
       a, b = 1, 2

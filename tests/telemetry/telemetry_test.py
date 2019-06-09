@@ -10,7 +10,7 @@ class TestTelemetry:
       return telemetry.Telemeter()
 
   def test_constants(self, telem):
-      assert(len(telemetry.SERVICES) == 1)
+      assert(len(telemetry.SERVICES) > 1)
 
   def test_init(self, telem):
       assert(telem.service('statsd').__class__.__name__ == 'Statsd')

@@ -20,11 +20,21 @@ class TestTelemetry:
     def test_gauge(self, telem):
         telem.gauge('statsd', 'some.gauge.name', 123)
 
-    def test_benchmark(self):
+    def test_runtime(self):
         report_name = "stats.runtime.name"
 
         with runtime('statsd', report_name):
             sleep(1)
         
         assert(telemetry.get_client().name == report_name)
-        assert(int(telemetry.get_client().value/1000) == 1)
+        assert(telemetry.get_client().value // 1000 == 1)
+
+    def test_runtime_micro(self):
+        report_name = "stats.runtime.name"
+
+        with runtime('statsd', report_name):
+            sleep(0.25)
+        
+        value = telemetry.get_client().value // 10 
+        assert(telemetry.get_client().name == report_name)
+        assert(value == 25)

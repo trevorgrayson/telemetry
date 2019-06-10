@@ -1,5 +1,3 @@
-export
-TAGS := git pull --tags
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -11,8 +9,8 @@ virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
 	@. $(VIRTDIR)/bin/activate
 
-compile: virtualenv 
-	@pip install -q -r requirements.txt
+compile: 
+	@pip install -q -r requirements.txt --user
 
 test: compile
 	# maybe use env command?
@@ -32,6 +30,7 @@ publish:
 clean:
 	find . -name "*.pyc" -delete
 	find . -name "*.sw*" -delete
+	find . -name "__pycache__" -delete
 
 version:
 	@echo "$(VERSION)"

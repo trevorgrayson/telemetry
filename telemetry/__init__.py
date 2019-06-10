@@ -1,12 +1,12 @@
 import os
-from statsd_client import Statsd
+from .statsd_client import Statsd
 
 SERVICES = {
   'statsd': Statsd
 }
 
 
-class Telemetry:
+class Telemeter:
 
     def __init__(self):
       self._services = {

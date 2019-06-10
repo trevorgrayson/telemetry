@@ -7,7 +7,7 @@ class TestTelemetry:
   
   @fixture
   def telem(self):
-      return telemetry.Telemetry()
+      return telemetry.Telemeter()
 
   def test_constants(self, telem):
       assert(len(telemetry.SERVICES) == 1)

@@ -1,5 +1,6 @@
 import os
 import subprocess
+import setuptools
 from distutils.core import setup
 
 
@@ -12,8 +13,9 @@ EXTRAS = { # 'statsd': ['statsd']
 
 setup(
     name='telemetry',
-    version="v0.2.21",
-    packages=['telemetry',],
+    version="v0.2.22",
+    packages=setuptools.find_packages(),
+    # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
     #package_dir={ 'telemetry': 'src/telemetry' },
     description="""

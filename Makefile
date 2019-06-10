@@ -19,13 +19,15 @@ test: compile
 staging:
 	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-publish:
+package:
 	rm -rf dist
 	@echo "$(VERSION_NEW)" > VERSION
 	git tag "$(VERSION_NEW)"
 	python setup.py sdist
+
+publish: package
 	twine upload dist/*
-	git push --tags
+	# git push --tags
 
 clean:
 	find . -name "*.pyc" -delete

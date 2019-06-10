@@ -1,5 +1,3 @@
-export
-TAGS := git pull --tags
 PYTHONPATH := "venv"
 VIRTDIR := ./venv
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -11,7 +9,7 @@ virtualenv:
 	@[ -d $(VIRTDIR) ] || virtualenv -q $(VIRTDIR)
 	@. $(VIRTDIR)/bin/activate
 
-compile: virtualenv 
+compile: 
 	@pip install -q -r requirements.txt
 
 test: compile
@@ -22,16 +20,17 @@ staging:
 	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 publish:
-	echo $(VERSION_NEW)
-	# rm -rf dist
-	# git tag "$(VERSION_NEW)"
-	# python setup.py sdist
-	# twine upload dist/*
-	# git push --tags
+	@echo $(VERSION_NEW)
+	rm -rf dist
+	git tag "$(VERSION_NEW)"
+	python setup.py sdist
+	twine upload dist/*
+	git push --tags
 
 clean:
 	find . -name "*.pyc" -delete
 	find . -name "*.sw*" -delete
+	find . -name "__pycache__" -delete
 
 version:
 	@echo "$(VERSION)"

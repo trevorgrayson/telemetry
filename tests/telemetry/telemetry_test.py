@@ -1,7 +1,7 @@
 from pytest import fixture
 
 import telemetry
-from telemetry import benchmark
+from telemetry.decorators import benchmark
 from time import sleep
 
 

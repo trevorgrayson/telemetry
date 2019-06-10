@@ -22,10 +22,10 @@ staging:
 publish:
 	@echo $(VERSION_NEW)
 	rm -rf dist
-	git tag "$(VERSION_NEW)"
+	# git tag "$(VERSION_NEW)"
 	echo "$(VERSION_NEW)" > VERSION
 	python setup.py sdist
-	twine upload dist/*
+	# twine upload dist/*
 	# git push --tags
 
 clean:

@@ -7,14 +7,14 @@ REQUIRED = ['statsd']
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-VERSION = open('VERSION', 'r').read().strip()
+# VERSION = open('VERSION', 'r').read().strip()
 
 EXTRAS = { # 'statsd': ['statsd'] 
 }
 
 setup(
     name='telemetry',
-    version=VERSION,
+    version="v0.2.19",
     packages=['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
     #package_dir={ 'telemetry': 'src/telemetry' },

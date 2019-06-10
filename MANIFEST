@@ -4,5 +4,5 @@ setup.cfg
 setup.py
 telemetry/__init__.py
 telemetry/__main__.py
-telemetry/statsd_client.py
-telemetry/wrappers.py
+telemetry/decorators.py
+telemetry/default.py

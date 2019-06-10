@@ -7,16 +7,14 @@ REQUIRED = ['statsd']
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-# VERSION = open('VERSION', 'r').read().strip()
-
 EXTRAS = { # 'statsd': ['statsd'] 
 }
 
 setup(
     name='telemetry',
-    version="v0.2.19",
+    version="v0.2.20",
     packages=['telemetry',],
-    package_data={'': ['README.md', 'VERSION']},
+    package_data={'': ['README.md']},
     #package_dir={ 'telemetry': 'src/telemetry' },
     description="""
 Remote measuring abstraction for software applications.

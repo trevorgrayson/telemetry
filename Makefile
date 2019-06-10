@@ -32,6 +32,7 @@ clean:
 	find . -name "*.pyc" -delete
 	find . -name "*.sw*" -delete
 	find . -name "__pycache__" -delete
+	rm -rf venv
 
 version:
 	@echo "$(VERSION)"

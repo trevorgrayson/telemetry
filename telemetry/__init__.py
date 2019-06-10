@@ -1,11 +1,13 @@
 import os
 from time import time_ns
 
-from .statsd_client import Statsd 
+from .clients.graphite import Statsd 
+from .clients.default import Default
 
 
 SERVICES = {
-  'statsd': Statsd
+    'statsd': Statsd,
+    'default': Default
 }
 
 

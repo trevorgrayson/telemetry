@@ -10,7 +10,7 @@ virtualenv:
 	@. $(VIRTDIR)/bin/activate
 
 compile: 
-	@pip install -q -r requirements.txt --user
+	@pip install -q -r requirements.txt
 
 test: compile
 	# maybe use env command?

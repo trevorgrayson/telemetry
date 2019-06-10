@@ -12,7 +12,7 @@ class TestTelemetry:
         return telemetry.Telemeter()
     
     def test_constants(self, telem):
-        assert(len(telemetry.SERVICES) == 1)
+        assert(len(telemetry.SERVICES) > 1)
     
     def test_init(self, telem):
         assert(telem.service('statsd').__class__.__name__ == 'Statsd')
@@ -22,6 +22,7 @@ class TestTelemetry:
 
     def test_benchmark(self):
         report_name = "stats.runtime.name"
+
         with runtime('statsd', report_name):
             sleep(1)
         

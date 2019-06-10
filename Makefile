@@ -26,7 +26,7 @@ publish:
 	echo "$(VERSION_NEW)" > VERSION
 	python setup.py sdist
 	twine upload dist/*
-	git push --tags
+	# git push --tags
 
 clean:
 	find . -name "*.pyc" -delete

@@ -16,7 +16,7 @@ setup(
     name='telemetry',
     version=VERSION,
     packages=['telemetry',],
-    package_data={'': ['README.md']},
+    package_data={'': ['README.md', 'VERSION']},
     #package_dir={ 'telemetry': 'src/telemetry' },
     description="""
 Remote measuring abstraction for software applications.

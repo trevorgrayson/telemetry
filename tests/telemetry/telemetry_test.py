@@ -1,7 +1,7 @@
 from pytest import fixture
 
 import telemetry
-from telemetry.decorators import benchmark
+from telemetry import runtime
 from time import sleep
 
 
@@ -21,8 +21,8 @@ class TestTelemetry:
         telem.gauge('statsd', 'some.gauge.name', 123)
 
     def test_benchmark(self):
-        report_name = "stats.benchmark.name"
-        with benchmark('statsd', report_name):
+        report_name = "stats.runtime.name"
+        with runtime('statsd', report_name):
             sleep(1)
         
         assert(telemetry.get_client().name == report_name)

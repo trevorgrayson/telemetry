@@ -23,6 +23,7 @@ publish:
 	@echo $(VERSION_NEW)
 	rm -rf dist
 	git tag "$(VERSION_NEW)"
+	echo "$(VERSION_NEW)" > VERSION
 	python setup.py sdist
 	twine upload dist/*
 	git push --tags

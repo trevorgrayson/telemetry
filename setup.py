@@ -7,14 +7,9 @@ REQUIRED = ['statsd']
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-git_proc = subprocess.Popen(os.path.join(BIN_DIR, 'bin/version'), stdout=subprocess.PIPE, shell=True)
-(VERSION, err) = git_proc.communicate()
-git_proc.wait()
+VERSION = open('VERSION', 'r').read().strip()
 
-VERSION = VERSION.strip()
-
-EXTRAS = {
-    # 'statsd': ['statsd']
+EXTRAS = { # 'statsd': ['statsd'] 
 }
 
 setup(

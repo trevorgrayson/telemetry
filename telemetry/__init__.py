@@ -1,6 +1,9 @@
 import os
-from statsd_client import Statsd
-from default import Default
+import time  # datetime may have more precision
+
+from .clients.graphite import Statsd 
+from .clients.default import Default
+
 
 SERVICES = {
     'statsd': Statsd,
@@ -22,21 +25,8 @@ class Telemeter:
         self.service(service_name).gauge(name, value)
 
 
-class benchmark():
-    def __init__(self, report_name):
-        self.report_name = report_name
-
-    def __enter__(self):
-        self.start = time_ns() // 1000000 
-
-    def __exit__(self, type, value, traceback):
-        end = time_ns() // 1000000 
-
-        elapsed = end - self.start
-        get_client().gauge(self.report_name, elapsed)
-
-
 _client = Telemeter()
+
 
 def set_client(client):
     global _client
@@ -47,3 +37,18 @@ def get_client():
     return _client
 
 
+class runtime():
+    def __init__(self, service, report_name):
+        self.service = service
+        self.report_name = report_name
+
+    def __enter__(self):
+        self.start = time.time()
+
+    def __exit__(self, type, value, traceback):
+        end = time.time()
+
+        elapsed = (end - self.start) * 1000
+        get_client().gauge(self.service,
+                           self.report_name, 
+                           elapsed)

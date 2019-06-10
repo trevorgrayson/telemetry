@@ -19,6 +19,7 @@ Furture Implementations
 * airbrake
 * elasticsearch
 * NewRelic Insights
+* influxdb
 
 ## Implementation
 
@@ -48,7 +49,7 @@ telemetry.gauge('statsd', 'test.some.key', 10)
 
 ```
 
-### Timing
+### Runtime
 
 Benchmarking and time measurements should be reported using these.  Values are submitted in milliseconds.
 
@@ -59,9 +60,9 @@ You have a couple of different ways to implement this.
 You may decorate a method to report on its runtime after completion.
 
 ```python
-from telemetry.decorators import report_time
+from telemetry.decorators import runtime
 
-@report_runtime('test.some.key')
+@runtime('test.some.key')
 def some_long_method(a, b):
 	sleep(10)
 
@@ -69,22 +70,14 @@ def some_long_method(a, b):
 
 #### `with` blocks
 
-You may use a `benchmark` block to report the runtime of the code inside its block.
+You may use a `runtime` block to report the runtime of the code inside its block.
 
 ```python
-from telemetry import benchmark
+from telemetry import runtime
 
-with benchmark('test.some.other.key'):
+with runtime('test.some.other.key'):
 	sleep(10)
 ```
-
-### Increment
-
-
-You may want to test in your development 
-environment, but don't want to run it consistently.  You may or may not collect in staging,
-a
-
 
 ## Testing
 

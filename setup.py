@@ -12,7 +12,7 @@ EXTRAS = { # 'statsd': ['statsd']
 
 setup(
     name='telemetry',
-    version="v0.2.20",
+    version="v0.2.21",
     packages=['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
     #package_dir={ 'telemetry': 'src/telemetry' },

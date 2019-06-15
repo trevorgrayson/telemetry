@@ -20,7 +20,7 @@ package:
 	PYTHONPATH=$(LIBPATH) python setup.py sdist
 
 publish: package
-	twine upload dist/*
+	PYTHONPATH=$(LIBPATH) python -m twine upload dist/*
 	# git push --tags
 
 clean:

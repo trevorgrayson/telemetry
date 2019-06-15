@@ -4,6 +4,10 @@ import time  # datetime may have more precision
 from .clients.graphite import Statsd 
 from .clients.default import Default
 
+__all__ = [
+  'Telemeter', 'runtime', 'get_client', 'set_client'
+]
+
 
 SERVICES = {
     'statsd': Statsd,
@@ -21,8 +25,8 @@ class Telemeter:
     def service(self, name):
         return self._services[name]
 
-    def gauge(self, service_name, name, value):
-        self.service(service_name).gauge(name, value)
+    def gauge(self, name, value, service='statsd'):
+        self.service(service).gauge(name, value)
 
 
 _client = Telemeter()
@@ -38,7 +42,8 @@ def get_client():
 
 
 class runtime():
-    def __init__(self, service, report_name):
+
+    def __init__(self, report_name, service='statsd'):
         self.service = service
         self.report_name = report_name
 
@@ -49,6 +54,6 @@ class runtime():
         end = time.time()
 
         elapsed = (end - self.start) * 1000
-        get_client().gauge(self.service,
-                           self.report_name, 
+        get_client().gauge(self.report_name, 
                            elapsed)
+

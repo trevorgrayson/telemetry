@@ -45,7 +45,7 @@ Gauge reports on values that will change over time and whose future and past mea
 ```python
 import telemetry
 
-telemetry.gauge('statsd', 'test.some.key', 10)
+telemetry.gauge('test.some.key', 10)
 
 ```
 

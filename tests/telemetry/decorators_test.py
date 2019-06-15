@@ -9,7 +9,7 @@ PROBE = get_client()
 REPORT_NAME = 'some.key'
 
 
-@runtime('statsd', REPORT_NAME)
+@runtime(REPORT_NAME)
 def a_slow_function(a, b):
       return a + b
 

@@ -4,7 +4,7 @@ from telemetry import get_client
 
 class runtime:
     
-    def __init__(self, service, report_name):
+    def __init__(self, report_name, service='statsd'):
         self.service = service
         self.report_name = report_name
 
@@ -15,8 +15,7 @@ class runtime:
             end = timeit.timeit()
 
             elapsed = end - start
-            get_client().gauge(self.service, 
-                               self.report_name, 
+            get_client().timing(self.report_name, 
                                elapsed)
 
             return result

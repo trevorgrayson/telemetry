@@ -8,3 +8,13 @@ class Statsd:
 
     def gauge(self, name, value):
         self.client.gauge(name, value)
+
+    def incr(self, name, value=1, rate=1):
+        self.client.incr(name, value, rate)
+
+    def decr(self, name, value=1, rate=1):
+        self.incr(name, -value, rate)
+
+    def timing(self, name, value, rate=1):
+        self.client.timing(name, value, rate)
+

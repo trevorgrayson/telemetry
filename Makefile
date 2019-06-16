@@ -8,7 +8,7 @@ compile:
 	@pip install -q -r requirements.txt -t $(LIBPATH)
 
 test: 
-	@PYTHONPATH=$(LIBPATH) python -m pytest
+	@PYTHONPATH=$(LIBPATH) tox
 
 staging:
 	# twine upload --repository-url https://test.pypi.org/legacy/ dist/*
@@ -20,7 +20,7 @@ package:
 	PYTHONPATH=$(LIBPATH) python setup.py sdist
 
 publish: package
-	PYTHONPATH=$(LIBPATH) python -m twine upload dist/*
+	PYTHONPATH=$(LIBPATH) python -m twine upload dist/* || echo "ERROR: pushing to pypi. Already uploaded?"
 	# git push --tags
 
 clean:

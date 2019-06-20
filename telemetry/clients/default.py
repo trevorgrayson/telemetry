@@ -12,7 +12,6 @@ class Default:
     def decr(*args, **kwargs):
         pass
 
-
     def timing(*args, **kwargs):
         pass
 

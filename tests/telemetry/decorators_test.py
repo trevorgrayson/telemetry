@@ -15,12 +15,8 @@ def a_slow_function(a, b):
 
 
 class TestTelemetryWrappers:
-  
-    @fixture
-    def telem(self):
-        return telemetry.Telemeter()
 
-    def test_constants(self, telem):
+    def test_constants(self):
         a, b = 1, 2
         result = a_slow_function(a, b)
 

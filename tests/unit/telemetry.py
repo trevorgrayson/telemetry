@@ -5,7 +5,7 @@ Mock Probes for testing
 
 class TelemetryProbe:
 
-    def __init(self):
+    def __init__(self):
         self.name = None
         self.value = None
 

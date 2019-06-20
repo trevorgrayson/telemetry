@@ -28,17 +28,39 @@ class Telemeter:
     def gauge(self, name, value, service='statsd'):
         self.service(service).gauge(name, value)
 
+    def incr(self, name, value=1, rate=1, service='statsd'):
+        self.service(service).incr(name, value, rate)
+
+    def decr(self, name, value=1, rate=1, service='statsd'):
+        self.service(service).incr(name, -value, rate)
+
+    def timing(self, name, value=1, rate=1, service='statsd'):
+        self.service(service).timing(name, value, rate)
+
 
 _client = Telemeter()
 
 
-def set_client(client):
-    global _client
-    _client = client
+
+def set_client(client, key='statsd'):
+    _client._services[key] = client
 
 
-def get_client():
-    return _client
+
+def get_client(key='statsd'):
+    return _client._services[key]
+
+
+def gauge(metric, value, service='statsd'):
+    _client.gauge(metric, value, service)
+
+
+def incr(metric, value=1, rate=1, service='statsd'):
+    _client.incr(metric, value, rate, service)
+
+
+def decr(metric, value=1, rate=1, service='statsd'):
+    _client.decr(metric, value, rate, service)
 
 
 class runtime():

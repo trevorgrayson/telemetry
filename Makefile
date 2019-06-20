@@ -8,6 +8,9 @@ compile:
 	@pip install -q -r requirements.txt -t $(LIBPATH)
 
 test: 
+	@PYTHONPATH=.:$(LIBPATH) pytest
+
+testAll: 
 	@PYTHONPATH=$(LIBPATH) tox
 
 staging:

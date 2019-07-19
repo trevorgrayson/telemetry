@@ -41,10 +41,8 @@ class Telemeter:
 _client = Telemeter()
 
 
-
 def set_client(client, key='statsd'):
     _client._services[key] = client
-
 
 
 def get_client(key='statsd'):

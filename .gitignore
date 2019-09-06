@@ -2,3 +2,7 @@
 *.sw*
 *.pyc
 dist
+.tox
+venv
+ENV
+telemetry.egg-info

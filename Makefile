@@ -8,10 +8,10 @@ MKDIR := $(dir $(mkfile_path))
 VERSION_NEW := ${shell git tag -l v[0-9]* | sort -V -r | head -n1 |  awk '/v/{split($$NF,v,/[.]/); $$NF=v[1]"."v[2]"."++v[3]}1'}
 
 
-compile: venv
-venv: requirements.txt requirements/*
+compile: $(LIBPATH)
+$(LIBPATH): requirements.txt requirements/*
 	$(PYTHON) -m pip install -r requirements.txt -t $(LIBPATH) --no-user
-	touch $(LIBPATH)/lasttime
+	touch $(LIBPATH)
 
 test: compile
 	$(PYTHON) -m pytest

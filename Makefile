@@ -10,7 +10,7 @@ VERSION_NEW := ${shell git tag -l v[0-9]* | sort -V -r | head -n1 |  awk '/v/{sp
 
 compile: $(LIBPATH)
 $(LIBPATH): requirements.txt requirements/*
-	$(PYTHON) -m pip install -r requirements.txt -t $(LIBPATH) --no-user
+	$(PYTHON) -m pip install -r requirements.txt -t $(LIBPATH)
 	touch $(LIBPATH)
 
 test: compile

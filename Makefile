@@ -10,7 +10,7 @@ VERSION_NEW := ${shell git tag -l v[0-9]* | sort -V -r | head -n1 |  awk '/v/{sp
 
 compile: $(LIBPATH)
 $(LIBPATH): requirements.txt requirements/*
-	$(PYTHON) -m pip || wget -qO- https://bootstrap.pypa.io/get-pip.py | python
+	$(PYTHON) -m pip -V || wget -qO- https://bootstrap.pypa.io/get-pip.py | python
 	$(PYTHON) -m pip install --target $(LIBPATH) -r requirements.txt 
 	touch $(LIBPATH)
 

@@ -95,3 +95,15 @@ assert telemetry.getClient.messages[0].name = "some.key"
 assert telemetry.getClient.messages[0].value = 10
 
 ```
+
+## Exception Monitoring
+
+Know when your application breaks. Airbrake is supported (Open Source equivalent as [errbit](https://github.com/errbit/errbit)).
+
+```python
+from telemetry import catch
+
+@catch('some_report')
+def exception_prone(ii):
+    return 1/ii
+```

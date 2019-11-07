@@ -8,14 +8,14 @@ MKDIR := $(dir $(mkfile_path))
 VERSION_NEW := ${shell git tag -l v[0-9]* | sort -V -r | head -n1 |  awk '/v/{split($$NF,v,/[.]/); $$NF=v[1]"."v[2]"."++v[3]}1'}
 
 
+test: compile
+	$(PYTHON) -m pytest --junitxml junit.xml
+
 compile: $(LIBPATH)
 $(LIBPATH): requirements.txt requirements/*
-	$(PYTHON) -m pip -V || wget -qO- https://bootstrap.pypa.io/get-pip.py | python
+	$(PYTHON) -m pip -V || wget -qO- https://bootstrap.pypa.io/get-pip.py | $(PYTHON)
 	$(PYTHON) -m pip install --target $(LIBPATH) -r requirements.txt 
 	touch $(LIBPATH)
-
-test: compile
-	$(PYTHON) -m pytest
 
 tox: compile
 	tox

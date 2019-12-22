@@ -15,8 +15,12 @@ class runtime:
             end = timeit.timeit()
 
             elapsed = end - start
-            get_client().timing(self.report_name, 
-                               elapsed)
+
+            report_name = self.report_name
+            if isinstance(report_name, type(lambda:1)):
+                report_name=self.report_name(*args, **kwargs)
+
+            get_client().timing(report_name, elapsed)
 
             return result
 

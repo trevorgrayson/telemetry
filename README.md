@@ -68,6 +68,27 @@ def some_long_method(a, b):
 
 ```
 
+##### Method Arguments
+
+You may incorporate method arguments by passing a lambda to decorators.
+
+```python
+from telemetry.decorators import runtime
+
+@runtime(lambda arg1, arg2: f"bar.value.{arg1}.{arg2}")
+def method_with_args(arg1, arg2):
+    pass
+
+class FooClass:
+    def __init__(self, inst):
+        self.instance = inst
+
+    @runtime(lambda self, *args: f"bar.{self.instance}.value.{args[0]}.{args[1]}")
+    def run(self, arg1, arg2):
+        pass
+
+```
+
 #### `with` blocks
 
 You may use a `runtime` block to report the runtime of the code inside its block.

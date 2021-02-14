@@ -2,7 +2,6 @@ import statsd
 
 
 class Statsd:
-
     def __init__(self, host, port=8125):
         if host is not None and ':' in host:
             host, port = host.split(':')

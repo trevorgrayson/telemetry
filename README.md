@@ -34,6 +34,17 @@ TELEM_STATSD=your.graphite-host.com python your-app.py
 
 Excluding a configuration will default to a no-operation implementation.
 
+### `add_service`
+
+Add services at run time.  Do this in your first bootstrap script, 
+much like you would do with [python logging](https://docs.python.org/3/howto/logging.html).
+
+```
+telemetry.add_service(telemetry.clients.Slack(
+    username="YOUR_USERNAME", token="YOUR_TOKEN", TARGET="TARGET_USERNAME"
+))
+```
+
 ## Data Types with Examples
 
 Presently only the `gauge` method is available.  The rest will be added shortly.

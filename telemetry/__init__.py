@@ -8,6 +8,11 @@ __all__ = [
   'Telemeter', 'runtime', 'get_client', 'set_client'
 ]
 
+REGISTERED_ACTIONS = [
+    'gauge', 'incr', 'decr',
+    'timing',
+    'log', 'exception'
+]
 
 SERVICES = {
     'statsd': Statsd,
@@ -18,9 +23,11 @@ SERVICES = {
 class Telemeter:
 
     def __init__(self):
-      self._services = {
-        k: klass(os.environ.get(("TELEM_%s" % k).upper())) for k, klass in SERVICES.items()
-      }
+        self._services = {
+          k: klass(os.environ.get(("TELEM_%s" % k).upper())) for k, klass in SERVICES.items()
+        }
+        self.registry = {}
+
         
     def service(self, name):
         return self._services[name]
@@ -40,10 +47,22 @@ class Telemeter:
     # text based
 
     def log(self, reason, level=0, service=None):
-        self.service(service).log(reason, level)
+        for handler in self.handlers('log'):
+            handler.log(reason)
 
     def exception(self, reason, service=None):
-        self.service(service).exception(reason)
+        for handler in self.handlers('exception'):
+            handler.exception(reason)
+
+    def add_handler(self, handler):
+        for action in REGISTERED_ACTIONS:
+            if hasattr(handler, action):
+                actions = self.registry.get(action, [])
+                actions.append(handler)
+                self.registry[action] = actions
+
+    def handlers(self, action):
+        return self.registry.get(action, [])
 
 _client = Telemeter()
 
@@ -67,6 +86,14 @@ def incr(metric, value=1, rate=1, service='statsd'):
 def decr(metric, value=1, rate=1, service='statsd'):
     _client.decr(metric, value, rate, service)
 
+def log(reason, level=0):
+    _client.log(reason)
+
+def exception(reason):
+    _client.exception(reason)
+
+def add_handler(handler):
+    _client.add_handler(handler)
 
 class runtime():
 

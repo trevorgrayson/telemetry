@@ -37,6 +37,13 @@ class Telemeter:
     def timing(self, name, value=1, rate=1, service='statsd'):
         self.service(service).timing(name, value, rate)
 
+    # text based
+
+    def log(self, reason, level=0, service=None):
+        self.service(service).log(reason, level)
+
+    def exception(self, reason, service=None):
+        self.service(service).exception(reason)
 
 _client = Telemeter()
 

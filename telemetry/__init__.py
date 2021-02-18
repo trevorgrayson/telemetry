@@ -1,7 +1,6 @@
 import os
 import time  # datetime may have more precision
 
-from .clients.graphite import Statsd 
 from .clients.default import Default
 
 __all__ = [
@@ -15,7 +14,6 @@ REGISTERED_ACTIONS = [
 ]
 
 SERVICES = {
-    'statsd': Statsd,
     'default': Default
 }
 
@@ -32,17 +30,21 @@ class Telemeter:
     def service(self, name):
         return self._services[name]
 
-    def gauge(self, name, value, service='statsd'):
-        self.service(service).gauge(name, value)
+    def gauge(self, name, value):
+        for handler in self.handlers('gauge'):
+            handler.gauge(name, value)
 
-    def incr(self, name, value=1, rate=1, service='statsd'):
-        self.service(service).incr(name, value, rate)
+    def incr(self, name, value=1, rate=1):
+        for handler in self.handlers('incr'):
+            handler.incr(name, value, rate)
 
-    def decr(self, name, value=1, rate=1, service='statsd'):
-        self.service(service).incr(name, -value, rate)
+    def decr(self, name, value=1, rate=1):
+        for handler in self.handlers('decr'):
+            handler.incr(name, -value, rate)
 
-    def timing(self, name, value=1, rate=1, service='statsd'):
-        self.service(service).timing(name, value, rate)
+    def timing(self, name, value=1, rate=1):
+        for handler in self.handlers('timing'):
+            handler.timing(name, value, rate)
 
     # text based
 
@@ -76,15 +78,15 @@ def get_client(key='statsd'):
 
 
 def gauge(metric, value, service='statsd'):
-    _client.gauge(metric, value, service)
+    _client.gauge(metric, value)
 
 
 def incr(metric, value=1, rate=1, service='statsd'):
-    _client.incr(metric, value, rate, service)
+    _client.incr(metric, value, rate)
 
 
 def decr(metric, value=1, rate=1, service='statsd'):
-    _client.decr(metric, value, rate, service)
+    _client.decr(metric, value, rate)
 
 def log(reason, level=0):
     _client.log(reason)

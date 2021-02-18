@@ -15,18 +15,12 @@ EXTRAS = {
 
 setup(
     name='telemetry',
-    version="v0.3.5",
+    version="v0.3.6",
     packages=setuptools.find_packages(),
     # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
     #package_dir={ 'telemetry': 'src/telemetry' },
-    description="""
-Remote measuring abstraction for software applications.
-
-`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. statsd, graphite, slack) 
-allowing the end user to plug in the desired telemetry framework at deployment time. Think [slf4j](https://www.slf4j.org/)
-but for events and numbers, not logs.  This library borrows from their example (and copy.)
-    """,
+    description="""Remote measuring abstraction for software applications.""",
     # long_description=open('README.md').read(),
     # long_description_content_type="text/markdown",
     author='trevor grayson',

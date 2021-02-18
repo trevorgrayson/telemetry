@@ -8,12 +8,14 @@ REQUIRED = ['statsd']
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-EXTRAS = { # 'statsd': ['statsd'] 
+EXTRAS = {
+    'statsd': ['statsd==3.3.0'],
+    'slack': ['slackclient==2.9.3'],
 }
 
 setup(
     name='telemetry',
-    version="v0.3.2",
+    version="v0.3.5",
     packages=setuptools.find_packages(),
     # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
@@ -21,17 +23,9 @@ setup(
     description="""
 Remote measuring abstraction for software applications.
 
-`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. statsd, graphite) 
+`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. statsd, graphite, slack) 
 allowing the end user to plug in the desired telemetry framework at deployment time. Think [slf4j](https://www.slf4j.org/)
 but for events and numbers, not logs.  This library borrows from their example (and copy.)
-
-As your projects grow, their telemetry requirements will change.  The purpose of this library is to simplify
-implementation, provide easy configuration, encourage testing, and avoid vendor lock.
-
-
-## Supported Services:
-
-* statsd/graphite
     """,
     # long_description=open('README.md').read(),
     # long_description_content_type="text/markdown",
@@ -45,7 +39,7 @@ implementation, provide easy configuration, encourage testing, and avoid vendor 
 
     # python_requires='2.7', #todo
     # install_requires=REQUIRED,
-    # extras_require=EXTRAS,
+    extras_require=EXTRAS,
     # include_package_data=True,
     license='MIT',
     classifiers=[

@@ -30,7 +30,7 @@ package: compile
 	$(PYTHON) setup.py sdist
 
 publish: package
-	$(PYTHON) -m twine upload dist/* || echo "ERROR: pushing to pypi. Already uploaded?"
+	@$(PYTHON) -m twine upload --verbose dist/* || echo "ERROR: pushing to pypi. Already uploaded?"
 	# git push --tags
 
 clean:
@@ -40,6 +40,6 @@ clean:
 	rm -rf $(LIBPATH)
 
 version:
-	@echo "$(VERSION)"
+	@echo "$(VERSION_NEW)"
 
-.PHONY: test clean
+.PHONY: test clean version

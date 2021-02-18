@@ -10,7 +10,7 @@ FROM = environ.get("SLACK_NAME", 'telemetry-test-bot')
 
 
 class SlackTelemeter:
-    def __init__(self, token, channel="#telemetry", from_name="telemetry"):
+    def __init__(self, token=None, channel="#telemetry", from_name="telemetry"):
         self.token = token if token is not None else SLACK_TOKEN
         self.channel = channel
         self.from_name = from_name

@@ -1,6 +1,5 @@
 import timeit
 import telemetry
-from telemetry import get_client
 
 
 class runtime:
@@ -18,10 +17,10 @@ class runtime:
             elapsed = end - start
 
             report_name = self.report_name
-            if isinstance(report_name, type(lambda:1)):
+            if isinstance(report_name, type(lambda: 1)):
                 report_name=self.report_name(*args, **kwargs)
 
-            get_client().timing(report_name, elapsed)
+            telemetry.timing(report_name, elapsed)
 
             return result
 

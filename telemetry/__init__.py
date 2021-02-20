@@ -87,17 +87,24 @@ def incr(metric, value=1, rate=1, service='statsd'):
 def decr(metric, value=1, rate=1, service='statsd'):
     _client.decr(metric, value, rate)
 
+
+def timing(name, value=1, rate=1):
+    _client.timing(name, value, rate)
+
+
 def log(reason, level=0):
     _client.log(reason)
+
 
 def exception(reason):
     _client.exception(reason)
 
+
 def add_handler(handler):
     _client.add_handler(handler)
 
-class runtime:
 
+class runtime:
     def __init__(self, report_name, service='statsd'):
         self.service = service
         self.report_name = report_name

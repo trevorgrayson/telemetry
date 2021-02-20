@@ -16,13 +16,12 @@ def a_slow_function(a, b):
 
 
 class TestRuntime:
-
     def test_constants(self):
         a, b = 1, 2
         result = a_slow_function(a, b)
 
         assert result == a + b
-        assert PROBE.name == REPORT_NAME
+        assert REPORT_NAME == PROBE.name
         assert PROBE.value != 0 
 
 

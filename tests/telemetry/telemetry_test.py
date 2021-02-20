@@ -11,6 +11,7 @@ class TestTelemetry:
     @fixture
     def probe(self):
         return TelemetryProbe()
+
     @fixture
     def telem(self, probe):
         telem = telemetry.Telemeter()

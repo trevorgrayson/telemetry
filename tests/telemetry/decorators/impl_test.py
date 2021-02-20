@@ -1,8 +1,10 @@
 from telemetry.decorators import runtime
-from telemetry import get_client
+import telemetry
+from tests.unit.telemetry import TelemetryProbe
 
-PROBE = get_client()
 INSTANCE = 'instance'
+PROBE = TelemetryProbe()
+telemetry.add_handler(PROBE)
 
 
 @runtime(lambda arg1, arg2: f"bar.value.{arg1}.{arg2}")

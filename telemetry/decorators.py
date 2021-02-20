@@ -1,4 +1,5 @@
 import timeit
+import telemetry
 from telemetry import get_client
 
 
@@ -28,9 +29,7 @@ class runtime:
 
 
 class catch:
-
-    def __init__(self, report_name, service='airbrake'):
-        self.service = service
+    def __init__(self, report_name):
         self.report_name = report_name
 
     def __call__(self, fn):
@@ -38,7 +37,9 @@ class catch:
             try:
                 return fn(*args, **kwargs)
             except Exception as err:
-                pass # IOU
+                telemetry.exception(
+                    f"{err.__class__.__name__}: {err}"
+                )
                 raise err
 
         return wrapper_catch

@@ -1,7 +1,7 @@
 from . import get_client
 
-class runtime():
 
+class runtime():
     def __init__(self, report_name, service='statsd'):
         self.service = service
         self.report_name = report_name

@@ -8,8 +8,7 @@ __all__ = [
 ]
 
 REGISTERED_ACTIONS = [
-    'gauge', 'incr', 'decr',
-    'timing',
+    'gauge', 'incr', 'decr', 'timing',
     'log', 'exception'
 ]
 
@@ -97,7 +96,7 @@ def exception(reason):
 def add_handler(handler):
     _client.add_handler(handler)
 
-class runtime():
+class runtime:
 
     def __init__(self, report_name, service='statsd'):
         self.service = service

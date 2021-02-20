@@ -25,3 +25,7 @@ class TelemetryProbe:
         self.name = name
         self.value = value
 
+    def exception(self, reason):
+        self.name = reason
+        self.value = 1
+

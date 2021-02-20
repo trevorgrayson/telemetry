@@ -2,11 +2,12 @@ from pytest import fixture, raises
 
 import telemetry
 from telemetry.decorators import runtime, catch
-from telemetry import get_client
+from tests.unit.telemetry import TelemetryProbe
 
 
-PROBE = get_client()
+PROBE = TelemetryProbe()
 REPORT_NAME = 'some.key'
+telemetry.add_handler(PROBE)
 
 
 @runtime(REPORT_NAME)
@@ -32,7 +33,9 @@ def exception_prone(ii):
 class TestsExcept:
     def test_catch_pass(self):
         assert exception_prone(2) == 0.5
-        
+
     def test_catch_throws(self):
         with raises(ZeroDivisionError):
             exception_prone(0)
+        assert 'ZeroDivisionError' in PROBE.name
+        assert PROBE.value == 1

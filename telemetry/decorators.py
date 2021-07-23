@@ -1,9 +1,7 @@
 import timeit
-from telemetry import get_client
 
 
 class runtime:
-    
     def __init__(self, report_name, service='statsd'):
         self.service = service
         self.report_name = report_name
@@ -20,7 +18,7 @@ class runtime:
             if isinstance(report_name, type(lambda:1)):
                 report_name=self.report_name(*args, **kwargs)
 
-            get_client().timing(report_name, elapsed)
+            # get_client().timing(report_name, elapsed)
 
             return result
 
@@ -28,7 +26,6 @@ class runtime:
 
 
 class catch:
-
     def __init__(self, report_name, service='airbrake'):
         self.service = service
         self.report_name = report_name

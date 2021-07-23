@@ -8,6 +8,8 @@ SLACK_ROOM_ID = environ.get("SLACK_ROOM_ID")
 
 
 class SlackTelemeter:
+    __requires__ = ['SLACK_ROOM_ID']
+
     def __init__(self, room_id):
         self.room_id = room_id
         if self.room_id is None:

@@ -8,8 +8,8 @@ parser.add_argument("--room", type=str, help="Room Id in TXXX/BYYY/ZZZ format")
 
 args = parser.parse_args()
 
+slack = SlackTelemeter(args.room)
 meter = telemetry.get_telemeter()
-meter.addHandler(
-    SlackTelemeter(args.room)
-)
+meter.addHandler(slack)
+
 meter.message(args.msg)

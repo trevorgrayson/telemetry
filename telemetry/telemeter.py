@@ -1,12 +1,20 @@
 import logging
+from .decorators import catch, runtime
 
 
 class Telemeter:
     def __init__(self):
         self.handlers = []
+        self.catch = catch
+        self.runtime = runtime
 
     def addHandler(self, handler):
         self.handlers.append(handler)
+
+    # def find_handlers(self, configs):
+    #     for handler in registry:
+    #         if all([v in configs.keys() for v in handler.__requires__]):
+    #             self.addHandler(handler())
 
     def __getattr__(self, name):
         """

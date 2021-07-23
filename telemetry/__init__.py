@@ -21,15 +21,15 @@ _telemeters = {
 
 def get_telemeter(name=None):
     global _telemeters
-    meter = _telemeters.get(name, _telemeters['default'])
+    if name is None:
+        name = 'default'
+    _telemeters[name] = _telemeters.get(name, Telemeter())
+    return _telemeters[name]
 
-    return meter
 
+class runtime:
 
-class runtime():
-
-    def __init__(self, report_name, service='statsd'):
-        self.service = service
+    def __init__(self, report_name):
         self.report_name = report_name
 
     def __enter__(self):
@@ -37,7 +37,4 @@ class runtime():
 
     def __exit__(self, type, value, traceback):
         end = time.time()
-
         elapsed = (end - self.start) * 1000
-
-

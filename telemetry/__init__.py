@@ -41,6 +41,9 @@ class Telemeter(TelemeterLogging):
     def timing(self, name, value=1, rate=1, service=None):
         self.service(service).timing(name, value, rate)
 
+    # def __getattr__(self, name):
+    # returns callable
+
 
 _client = Telemeter()
 

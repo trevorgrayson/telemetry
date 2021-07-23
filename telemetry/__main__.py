@@ -4,12 +4,10 @@ import sys
 from . import Telemeter
 
 
-
 def main(host, key, value):
     client = Telemeter()
     client.gauge('statsd', key, value)
     
-
 
 if __name__ == '__main__':
     host = os.environ.get('TELEM_STATSD')

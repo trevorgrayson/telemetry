@@ -1,12 +1,10 @@
 import logging
-from .decorators import catch, runtime
+from telemetry import decorators as decor
 
 
-class Telemeter:
+class Telemeter(decor.Decorators):
     def __init__(self):
         self.handlers = []
-        self.catch = catch
-        self.runtime = runtime
 
     def addHandler(self, handler):
         self.handlers.append(handler)

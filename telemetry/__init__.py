@@ -1,11 +1,12 @@
 import time  # datetime may have more precision
 
-from .clients.graphite import Statsd 
+from .clients.graphite import Statsd
 from .clients.default import Default
+from .clients.slack import SlackTelemeter
 from .telemeter import Telemeter
 
 __all__ = [
-  'Telemeter', 'runtime'
+  'Telemeter'
 ]
 
 SERVICES = {

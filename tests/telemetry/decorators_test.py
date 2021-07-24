@@ -1,26 +1,10 @@
 from pytest import raises
 
 import telemetry
-from telemetry.decorators import runtime, catch
 
 REPORT_NAME = 'some.key'
 
 meter = telemetry.get_telemeter(__name__)
-
-
-@meter.runtime(REPORT_NAME)
-def a_slow_function(a, b):
-      return a + b
-
-
-class TestRuntime:
-    def test_constants(self):
-        a, b = 1, 2
-        result = a_slow_function(a, b)
-
-        assert result == a + b
-        # assert PROBE.name == REPORT_NAME
-        # assert PROBE.value != 0
 
 
 @meter.catch('some_report')
@@ -35,3 +19,18 @@ class TestsExcept:
     def test_catch_throws(self):
         with raises(ZeroDivisionError):
             exception_prone(0)
+
+
+@meter.runtime(REPORT_NAME)
+def a_slow_function(a, b):
+    return a + b
+
+
+class TestRuntime:
+    def test_constants(self):
+        a, b = 1, 2
+        result = a_slow_function(a, b)
+
+        assert result == a + b
+        # assert PROBE.name == REPORT_NAME
+        # assert PROBE.value != 0

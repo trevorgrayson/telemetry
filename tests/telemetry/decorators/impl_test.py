@@ -1,9 +1,11 @@
-from telemetry.decorators import runtime
+import telemetry
 
 INSTANCE = 'instance'
 
+meter = telemetry.get_telemeter(__name__)
 
-@runtime(lambda arg1, arg2: f"bar.value.{arg1}.{arg2}")
+
+@meter.runtime(lambda arg1, arg2: f"bar.value.{arg1}.{arg2}")
 def method_with_args(arg1, arg2):
     pass
 
@@ -12,7 +14,7 @@ class FooClass:
     def __init__(self, inst):
         self.instance = inst
 
-    @runtime(lambda self, *args: f"bar.{self.instance}.value.{args[0]}.{args[1]}")
+    @meter.runtime(lambda self, *args: f"bar.{self.instance}.value.{args[0]}.{args[1]}")
     def run(self, arg1, arg2):
         pass
 

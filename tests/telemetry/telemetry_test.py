@@ -4,9 +4,7 @@ import telemetry
 from time import sleep
 
 
-
 class TestTelemetry:
-  
     @fixture
     def meter(self):
         meter = telemetry.get_telemeter()

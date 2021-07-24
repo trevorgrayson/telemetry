@@ -2,9 +2,14 @@ import logging
 from telemetry import decorators as decor
 
 
+class NoHandler(Exception):
+    pass
+
+
 class Telemeter(decor.Decorators):
-    def __init__(self):
+    def __init__(self, config_errors=False):
         self.handlers = []
+        self.config_errors = config_errors
 
     def addHandler(self, handler):
         self.handlers.append(handler)
@@ -33,3 +38,5 @@ class Telemeter(decor.Decorators):
             return delegate
         else:
             logging.warning(f"No delegates for {name} method.")
+            if self.config_errors:
+                raise NoHandler(f"No Telemetery Handlers for method `{name}`")

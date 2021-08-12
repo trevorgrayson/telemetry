@@ -1,4 +1,5 @@
 from os import environ
+import logging
 from json import dumps
 from http.client import HTTPSConnection
 from datetime import datetime
@@ -6,28 +7,33 @@ from datetime import datetime
 PAGERDUTY_KEY = environ.get("PAGERDUTY_KEY")
 PAGERDUTY_HOST = "events.pagerduty.com"
 EVENT_PATH = "/v2/enqueue"
+PAGERDUTY_LEVEL = getattr(logging, environ.get("PAGERDUTY_LEVEL", "ERROR"))
+# TODO PAGERDUTY_CHANGE = "INFO"
 
 
-class PagerDutyTelemeter:
-    __requires__ = ['']
+class PagerDutyTelemeter(logging.StreamHandler):
+    __requires__ = ['PAGERDUTY_KEY']
 
     def __init__(self, **kwargs):
+        logging.StreamHandler.__init__(self)
         self.routing_key = kwargs.get("routing_key", PAGERDUTY_KEY)
-        self._conn = None
+        self._conn = None  # lazy loading - occasional use!
+
+    # def alert(self, msg):
+    # def change(self, msg):
+
+    def emit(self, record):
+        if record.levelno >= PAGERDUTY_LEVEL:
+            msg = self.format(record)
+            return self.message(msg)
 
     def message(self, msg):
-        self.conn.request("POST", EVENT_PATH,
-                          body=dumps(self.payload(msg)),
-                          headers=self.headers)
-        resp = self.conn.getresponse()
-        if resp.status == 202:
-            return True
-
-    def alert(self, msg):
-        self.message(msg)
-
-    def change(self, msg):
-        pass
+            self.conn.request("POST", EVENT_PATH,
+                              body=dumps(self.payload(msg)),
+                              headers=self.headers)
+            resp = self.conn.getresponse()
+            if resp.status in [202]:
+                return True
 
     @property
     def headers(self):
@@ -41,7 +47,6 @@ class PagerDutyTelemeter:
         if self._conn:
             return self._conn
         self._conn = HTTPSConnection(PAGERDUTY_HOST)
-
         return self._conn
 
     def payload(self, msg):

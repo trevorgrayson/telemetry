@@ -3,6 +3,7 @@ import time  # datetime may have more precision
 from .clients.graphite import Statsd
 from .clients.default import Default
 from .clients.slack import SlackTelemeter
+from .clients.pagerduty import PagerDutyTelemeter
 from .telemeter import Telemeter
 
 __all__ = [

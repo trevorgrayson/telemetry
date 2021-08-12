@@ -1,14 +1,16 @@
 from argparse import ArgumentParser
-from . import PagerDutyTelemeter
-import telemetry
+from telemetry import loggers
+import logging
 
 parser = ArgumentParser(description="PagerDutyTelemeter CLI")
 parser.add_argument("msg", type=str, help="error message to be sent")
 
 args = parser.parse_args()
 
-service = PagerDutyTelemeter()
-meter = telemetry.get_telemeter()
-meter.addHandler(service)
-
-meter.message(args.msg)
+service = loggers.PagerDutyTelemeter()
+logger = logging.getLogger('telemetry')
+logger.addHandler(service)
+logging.getLogger()
+logger.info("info")
+logger.warning("warning")
+logger.error(args.msg)

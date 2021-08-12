@@ -1,4 +1,5 @@
 from os import environ
+import logging
 from json import dumps
 from http.client import HTTPSConnection
 
@@ -7,10 +8,11 @@ SLACK_PATH = '/services/%s'
 SLACK_ROOM_ID = environ.get("SLACK_ROOM_ID")
 
 
-class SlackTelemeter:
+class SlackTelemeter(logging.StreamHandler):
     __requires__ = ['SLACK_ROOM_ID']
 
     def __init__(self, room_id):
+        logging.StreamHandler.__init__(self)
         self.room_id = room_id
         if self.room_id is None:
             self.room_id = SLACK_ROOM_ID
@@ -19,8 +21,13 @@ class SlackTelemeter:
     def body(self, text):
         return dumps({"text": text})
 
+    def emit(self, record):
+        msg = self.format(record)
+        return self.message(msg)
+
     def message(self, msg):
         self.conn.request("POST", SLACK_PATH % self.room_id, self.body(msg))
         # TODO this is blocking
         response = self.conn.getresponse()
-        return response.status == 200
+        if response.status == 200:
+            return True

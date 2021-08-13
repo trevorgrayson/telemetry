@@ -42,4 +42,4 @@ clean:
 version:
 	@echo "$(VERSION)"
 
-.PHONY: test clean
+.PHONY: test clean version

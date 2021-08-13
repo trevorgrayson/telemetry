@@ -1,3 +1,4 @@
+build
 .venv
 *.sw*
 *.pyc
@@ -6,3 +7,5 @@ dist
 venv
 ENV
 telemetry.egg-info
+.idea
+junit.xml

@@ -16,6 +16,8 @@ class SlackTelemeter(logging.StreamHandler):
         self.room_id = room_id
         if self.room_id is None:
             self.room_id = SLACK_ROOM_ID
+        if self.room_id is None:
+            raise TelemeterConfigException(f"SlackTelemeter requires {self.__requires__}")
         self.conn = HTTPSConnection(SLACK_HOST)
 
     def body(self, text):

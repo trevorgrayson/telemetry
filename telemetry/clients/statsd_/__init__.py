@@ -2,7 +2,6 @@ import statsd
 
 
 class Statsd:
-
     def __init__(self, host, port=8125):
         if host is not None and ':' in host:
             host, port = host.split(':')
@@ -19,4 +18,3 @@ class Statsd:
 
     def timing(self, name, value, rate=1):
         self.client.timing(name, value, rate)
-

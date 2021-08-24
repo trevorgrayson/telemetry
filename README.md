@@ -1,130 +1,37 @@
-# telemetry
-
 Remote measuring abstraction for software applications.
 
-`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. statsd, graphite) 
-allowing the end user to plug in the desired telemetry framework at deployment time. Think [slf4j](https://www.slf4j.org/)
-but for events and numbers, not logs.  This library borrows from their example (and copy.)
+`telemetry` serves as a simple facade or abstraction for various telemetry frameworks (e.g. pagerduty, slack, graphite) 
+allowing the end user to plug in the desired telemetry framework at deployment time. Think [slf4j](http://www.slf4j.org/)
+but for events and numbers.  This library borrows from their example (and copy.)
 
 As your projects grow, their telemetry requirements will change.  The purpose of this library is to simplify
 implementation, provide easy configuration, encourage testing, and avoid vendor lock.
 
-
 ## Supported Services:
 
-* statsd/graphite
+* pagerduty
+* slack
 
-Furture Implementations
+Telemeters preference to being configurable, but don't require more than
+credentials to get working. For instance, slack can be implemented with
+the following:
 
-* airbrake
-* elasticsearch
-* NewRelic Insights
-* influxdb
+```SLACK_ROOM_ID=Txxx/Byyy/Zzzz python
+import logging
+from telemetry import SlackTelemeter
 
-## Implementation
-
-The application data that you would like to report likely varies considerably
-between applications and even environments. This library favors [environment variables](https://en.wikipedia.org/wiki/Environment_variable) for turning services on/off and configuration.  You may implement this library in other ways.
-
-Generally, after implementation, the easiest configuration will be:
-
-```bash
-TELEM_STATSD=your.graphite-host.com python your-app.py
+logging.basicConfig(level=logging.INFO)
+logging.getLogger().addHandler(SlackTelemeter())
+logging.info("hello room!")
 ```
 
-Excluding a configuration will default to a no-operation implementation.
+or 
 
-## Data Types with Examples
+```SLACK_ROOM_ID=Txxx/Byyy/Zzzz python
 
-Presently only the `gauge` method is available.  The rest will be added shortly.
-
-### Gauge 
-
-Gauge reports on values that will change over time and whose future and past measurements won't affect its present value.  If you wanted to report the value of the speedometer in your car, this is your best choice.
-
-```python
-import telemetry
-
-telemetry.gauge('test.some.key', 10)
-
+from telemetry import SlackTelemeter
+meter = SlackTelemeter()
+meter.message("your message!")
 ```
 
-### Runtime
-
-Benchmarking and time measurements should be reported using these.  Values are submitted in milliseconds.
-
-You have a couple of different ways to implement this.
-
-#### Decorators
-
-You may decorate a method to report on its runtime after completion.
-
-```python
-from telemetry.decorators import runtime
-
-@runtime('test.some.key')
-def some_long_method(a, b):
-	sleep(10)
-
-```
-
-##### Method Arguments
-
-You may incorporate method arguments by passing a lambda to decorators.
-
-```python
-from telemetry.decorators import runtime
-
-@runtime(lambda arg1, arg2: f"bar.value.{arg1}.{arg2}")
-def method_with_args(arg1, arg2):
-    pass
-
-class FooClass:
-    def __init__(self, inst):
-        self.instance = inst
-
-    @runtime(lambda self, *args: f"bar.{self.instance}.value.{args[0]}.{args[1]}")
-    def run(self, arg1, arg2):
-        pass
-
-```
-
-#### `with` blocks
-
-You may use a `runtime` block to report the runtime of the code inside its block.
-
-```python
-from telemetry import runtime
-
-with runtime('test.some.other.key'):
-	sleep(10)
-```
-
-## Testing
-
-Some telemetry data can be mission critical. Test for it.  Since you have a facade in front of your service, you don't need to test that it gets to your service.
-
-```python
-import telemetry
-from telemetry.test import TelemetryProbe
-
-telemetry.setClient(TelemetryProbe())
-
-telemetry.gauge("some.key", 10)
-
-assert telemetry.getClient.messages[0].name = "some.key"
-assert telemetry.getClient.messages[0].value = 10
-
-```
-
-## Exception Monitoring
-
-Know when your application breaks. Airbrake is supported (Open Source equivalent as [errbit](https://github.com/errbit/errbit)).
-
-```python
-from telemetry import catch
-
-@catch('some_report')
-def exception_prone(ii):
-    return 1/ii
-```
+Clients are written using core python libraries, so `telemetry` is light weight.

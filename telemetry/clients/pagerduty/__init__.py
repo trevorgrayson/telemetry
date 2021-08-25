@@ -3,6 +3,7 @@ import logging
 from json import dumps
 from http.client import HTTPSConnection
 from datetime import datetime
+from telemetry.telemeter import TelemeterConfigException
 
 PAGERDUTY_KEY = environ.get("PAGERDUTY_KEY")
 PAGERDUTY_HOST = "events.pagerduty.com"
@@ -16,8 +17,11 @@ class PagerDutyTelemeter(logging.StreamHandler):
 
     def __init__(self, **kwargs):
         logging.StreamHandler.__init__(self)
+        raises = kwargs.get("raises", False)
         self.routing_key = kwargs.get("routing_key", PAGERDUTY_KEY)
         self._conn = None  # lazy loading - occasional use!
+        if raises and not self.routing_key:
+            raise TelemeterConfigException(f"PagerDutyTelemeter requires {self.__requires__}")
 
     # def alert(self, msg):
     # def change(self, msg):

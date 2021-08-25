@@ -2,6 +2,7 @@ from os import environ
 import logging
 from json import dumps
 from http.client import HTTPSConnection
+from telemetry.telemeter import TelemeterConfigException
 
 SLACK_HOST = 'hooks.slack.com'
 SLACK_PATH = '/services/%s'
@@ -11,12 +12,12 @@ SLACK_ROOM_ID = environ.get("SLACK_ROOM_ID")
 class SlackTelemeter(logging.StreamHandler):
     __requires__ = ['SLACK_ROOM_ID']
 
-    def __init__(self, room_id=None):
+    def __init__(self, room_id=None, raises=False):
         logging.StreamHandler.__init__(self)
         self.room_id = room_id
         if self.room_id is None:
             self.room_id = SLACK_ROOM_ID
-        if self.room_id is None:
+        if raises and self.room_id is None:
             raise TelemeterConfigException(f"SlackTelemeter requires {self.__requires__}")
         self.conn = HTTPSConnection(SLACK_HOST)
 

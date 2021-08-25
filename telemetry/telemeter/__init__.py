@@ -6,6 +6,10 @@ class NoHandler(Exception):
     pass
 
 
+class TelemeterConfigException(Exception):
+    pass
+
+
 class Telemeter(decor.Decorators):
     def __init__(self, config_errors=False):
         self.handlers = []

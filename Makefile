@@ -25,7 +25,7 @@ staging:
 
 package: compile
 	rm -rf dist
-	@echo "$(VERSION_NEW)" > VERSION
+	@echo "$(VERSION_NEW)" | sed -e s/v// > VERSION
 	git tag "$(VERSION_NEW)"
 	$(PYTHON) setup.py sdist
 
@@ -39,7 +39,4 @@ clean:
 	find . -name "__pycache__" -delete
 	rm -rf $(LIBPATH)
 
-version:
-	@echo "$(VERSION)"
-
-.PHONY: test clean version
+.PHONY: test clean

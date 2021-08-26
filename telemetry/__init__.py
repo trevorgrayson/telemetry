@@ -1,9 +1,11 @@
 import time  # datetime may have more precision
+from os import environ
 
 from .clients.default import Default
 from .clients.slack import SlackTelemeter
 from .clients.pagerduty import PagerDutyTelemeter
 from .telemeter import Telemeter
+from telemetry import loggers
 
 __all__ = [
   'Telemeter'
@@ -13,10 +15,34 @@ SERVICES = {
     'default': Default
 }
 
+REGISTRY = [
+    PagerDutyTelemeter,
+    SlackTelemeter
+]
+ACTIVE_TELEMETERS = []
+
 
 _telemeters = {
     "default": Telemeter()
 }
+
+
+def is_configured(meter: Telemeter):
+    return all([req in environ for req in meter.__requires__])
+
+
+def is_logger(meter: Telemeter):
+    return hasattr(loggers, meter.__name__)
+
+
+def load_env(logger=None):
+    global ACTIVE_TELEMETERS
+    for meter in REGISTRY:
+        if is_configured(meter):
+            m = meter()
+            ACTIVE_TELEMETERS.append(m)
+            if logger is not None and is_logger(meter):
+                logger.addHandler(m)
 
 
 def get_telemeter(name=None):

@@ -1,3 +1,4 @@
 from os import environ
 
-environ["PAGERDUTY"]
+if "PAGERDUTY_KEY" in environ:
+    del environ["PAGERDUTY_KEY"]

@@ -1,5 +1,6 @@
 setuptools>=38.6.0
 wheel>=0.31.0
 pytest==5.2.2
+pytest-cov==2.12.1
 twine==1.13.0
 tox

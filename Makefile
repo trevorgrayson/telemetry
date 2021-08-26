@@ -9,7 +9,7 @@ VERSION_NEW := ${shell git tag -l v[0-9]* | sort -V -r | head -n1 |  awk '/v/{sp
 
 
 test: compile
-	$(PYTHON) -m pytest --junitxml junit.xml
+	$(PYTHON) -m pytest --cov --junitxml junit.xml
 
 compile: $(LIBPATH)
 $(LIBPATH): requirements.txt requirements/*

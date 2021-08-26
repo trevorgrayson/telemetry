@@ -37,6 +37,7 @@ def is_logger(meter: Telemeter):
 
 def load_env(logger=None):
     global ACTIVE_TELEMETERS
+    ACTIVE_TELEMETERS = []  # TODO scan if each telemeter is loaded already.
     for meter in REGISTRY:
         if is_configured(meter):
             m = meter()

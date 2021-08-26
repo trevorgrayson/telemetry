@@ -1,12 +1,6 @@
-from os import environ
 from pytest import raises
 from telemetry import SlackTelemeter
 from telemetry.telemeter import TelemeterConfigException
-
-
-for req in SlackTelemeter.__requires__:
-    if req in environ:
-        del environ[req]
 
 
 class TestSlackTelemeter:

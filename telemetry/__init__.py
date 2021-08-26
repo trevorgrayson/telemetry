@@ -7,10 +7,6 @@ from .clients.pagerduty import PagerDutyTelemeter
 from .telemeter import Telemeter
 from telemetry import loggers
 
-__all__ = [
-  'Telemeter'
-]
-
 SERVICES = {
     'default': Default
 }

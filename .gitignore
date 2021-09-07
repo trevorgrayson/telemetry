@@ -9,3 +9,4 @@ ENV
 telemetry.egg-info
 .idea
 junit.xml
+.coverage

@@ -31,6 +31,12 @@ def is_logger(meter: Telemeter):
     return hasattr(loggers, meter.__name__)
 
 
+def env_loggers():
+    for meter in REGISTRY:
+        if is_configured(meter) and is_logger(meter):
+            yield meter
+
+
 def load_env(logger=None):
     global ACTIVE_TELEMETERS
     ACTIVE_TELEMETERS = []  # TODO scan if each telemeter is loaded already.

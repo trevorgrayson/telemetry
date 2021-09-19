@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
+# TODO use the right python
 python3 -m telemetry $@

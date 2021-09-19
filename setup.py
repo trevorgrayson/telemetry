@@ -14,7 +14,7 @@ EXTRAS = { # 'statsd': ['statsd']
 
 setup(
     name='telemetry',
-    version='1.0.8',  # open("VERSION", "r").read(),
+    version='1.1.0',  # open("VERSION", "r").read(),
     packages=setuptools.find_packages(),
     # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},

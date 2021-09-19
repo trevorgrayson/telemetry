@@ -67,7 +67,7 @@ Clients are written using core python libraries, so `telemetry` is light weight.
     url='http://github.com/trevorgrayson/telemetry',
 
     py_modules=['telemetry'],
-
+    scripts=['bin/telemetry'],
     # entry_points={ },
 
     # python_requires='2.7', #todo

@@ -46,9 +46,9 @@ If you'd like to completely remove reference of `telemetry`
 from your app, you can use the python wrapper.
 
 ```sh
-python -m telemeter your.module
+python -m telemetry your.module
 
 # or if you installed scripts
 
-telemeter your.module
+telemetry your.module
 ```

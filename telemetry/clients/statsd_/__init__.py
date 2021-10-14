@@ -1,7 +1,7 @@
 from os import environ
 import statsd
 
-STATSD_HOST = environ.get("STATSD_HOST")  # "127.0.0.1"
+STATSD_HOST = environ.get("STATSD_HOST")
 
 
 class StatsdTelemeter:

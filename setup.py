@@ -14,7 +14,7 @@ EXTRAS = { # 'statsd': ['statsd']
 
 setup(
     name='telemetry',
-    version='1.1.0',  # open("VERSION", "r").read(),
+    version='1.2.0',  # open("VERSION", "r").read(),
     packages=setuptools.find_packages(),
     # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},
@@ -34,6 +34,7 @@ implementation, provide easy configuration, encourage testing, and avoid vendor 
 
 * pagerduty
 * slack
+* statsd, graphite, datadog
 
 Telemeters preference to being configurable, but don't require more than
 credentials to get working. For instance, slack can be implemented with

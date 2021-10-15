@@ -1,8 +1,15 @@
+from os import environ
 import statsd
 
+STATSD_HOST = environ.get("STATSD_HOST")  # "127.0.0.1"
 
-class Statsd:
-    def __init__(self, host, port=8125):
+
+class StatsdTelemeter:
+    __requires__ = ['STATSD_HOST']
+
+    def __init__(self, host=None, port=8125):
+        if host is None:
+            host = STATSD_HOST
         if host is not None and ':' in host:
             host, port = host.split(':')
         self.client = statsd.StatsClient(host, port)

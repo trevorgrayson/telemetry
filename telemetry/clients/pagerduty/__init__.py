@@ -65,5 +65,5 @@ class PagerDutyTelemeter(logging.StreamHandler):
             },
             # "dedup_key": "samplekeyhere",
             "client": "Telemetry",
-            "client_url": "https://pypi.org/projects/telemetry"
+            "client_url": "https://pypi.org/project/telemetry"
         }

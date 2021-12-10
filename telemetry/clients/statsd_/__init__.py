@@ -27,4 +27,4 @@ class StatsdTelemeter:
         self.client.timing(name, value, rate)
 
     def send(self):
-        self.client.send()
+        self.client.pipeline().send()

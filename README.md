@@ -13,7 +13,7 @@ Setting up a new service should be as easy as adding your API Keys.
 
 * [pagerduty](https://www.pagerduty.com/) - get your `PAGERDUTY_KEY` from https://{yourorg}.pagerduty.com/api_keys
 * [slack](https://api.slack.com/apps) - only needs a `SLACK_ROOM_ID` from your [Slack Webhook App](https://api.slack.com/apps)
-* [statsd](https://github.com/statsd/statsd) - ([graphite](https://graphiteapp.org/), [datadog](https://www.datadoghq.com/))
+* [statsd](./docs/STATSD.md) - also useful for [graphite](https://graphiteapp.org/) and [datadog](https://www.datadoghq.com/)
 
 Telemeters preference to being configurable, but don't require more than
 credentials to get working. For instance, slack can be implemented with

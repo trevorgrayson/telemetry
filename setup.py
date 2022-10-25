@@ -2,18 +2,18 @@ import os
 import setuptools
 from distutils.core import setup
 
-REQUIRED = ['statsd']
+REQUIRED = ['certifi']
 
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
-EXTRAS = { # 'statsd': ['statsd']
+EXTRAS = {
     'datadog': ["datadog-api-client"],
     'statsd': ['statsd']
 }
 
 setup(
     name='telemetry',
-    version='1.2.4',  # open("VERSION", "r").read(),
+    version='1.3.0',  # open("VERSION", "r").read(),
     packages=setuptools.find_packages(),
     # ['telemetry',],
     package_data={'': ['README.md', 'VERSION']},

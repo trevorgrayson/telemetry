@@ -3,7 +3,9 @@ import logging
 from json import dumps
 from http.client import HTTPSConnection
 from telemetry.telemeter import TelemeterConfigException
-
+import ssl
+import certifi
+ssl_context = ssl.create_default_context(cafile=certifi.where())
 SLACK_HOST = 'hooks.slack.com'
 SLACK_PATH = '/services/%s'
 SLACK_ROOM_ID = environ.get("SLACK_ROOM_ID")
@@ -19,7 +21,7 @@ class SlackTelemeter(logging.StreamHandler):
             self.room_id = SLACK_ROOM_ID
         if raises and self.room_id is None:
             raise TelemeterConfigException(f"SlackTelemeter requires {self.__requires__}")
-        self.conn = HTTPSConnection(SLACK_HOST)
+        self.conn = HTTPSConnection(SLACK_HOST, context=ssl_context)
 
     def body(self, text):
         return dumps({"text": text})

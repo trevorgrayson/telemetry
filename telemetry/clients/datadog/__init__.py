@@ -1,3 +1,4 @@
+# https://docs.datadoghq.com/developers/dogstatsd/?tab=python
 from os import environ
 from datadog import initialize, statsd
 

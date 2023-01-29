@@ -1,3 +1,10 @@
 from .default import Default
 from .slack import SlackTelemeter
-from .statsd_ import StatsdTelemeter
+try:
+    from .statsd_ import StatsdTelemeter
+except ImportError:
+    pass
+try:
+    from .datadog import DataDogStatsdTelemeter
+except ImportError:
+    pass

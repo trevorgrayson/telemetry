@@ -7,7 +7,7 @@ REQUIRED = ['certifi']
 BIN_DIR = os.path.dirname(os.path.realpath(__file__))
 
 EXTRAS = {
-    'datadog': ["datadog-api-client"],
+    'datadog': ["datadog"],
     'statsd': ['statsd']
 }
 

@@ -19,14 +19,11 @@ class DataDogStatsdTelemeter:
     def gauge(self, name, value):
         self.client.gauge(name, value)
 
-    def incr(self, name, value=1, rate=1):
-        self.client.incr(name, value, rate)
+    def incr(self, name, value=1, **kwargs):
+        self.client.increment(name, value, **kwargs)
 
-    def decr(self, name, value=1, rate=1):
-        self.client.incr(name, -value, rate)
+    def decr(self, name, value=1, **kwargs):
+        self.client.increment(name, -value, **kwargs)
 
-    def timing(self, name, value, rate=1):
-        self.client.timing(name, value, rate)
-
-    def send(self):
-        self.client.pipeline().send()
+    def timing(self, name, value, **kwargs):
+        self.client.timing(name, value, **kwargs)

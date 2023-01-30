@@ -9,5 +9,4 @@ args = parser.parse_args()
 meter = DataDogStatsdTelemeter()
 
 meter.incr(args.name)
-meter.send()
 print(f"{args.name} incremented.")

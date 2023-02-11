@@ -2,11 +2,11 @@
 from os import environ
 from datadog import initialize, statsd
 
-STATSD_HOST = environ.get("STATSD_HOST")
+STATSD_HOST = environ.get("DD_HOST", environ.get("STATSD_HOST"))
 
 
 class DataDogStatsdTelemeter:
-    __requires__ = ['STATSD_HOST']
+    __requires__ = []
 
     def __init__(self, host=None, port=8125, **options):
         if host is None:

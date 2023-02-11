@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from . import DataDogStatsdTelemeter
 
-parser = ArgumentParser(description="statsd test")
+parser = ArgumentParser(description="data dog statsd test")
 
 parser.add_argument("name", type=str)
 args = parser.parse_args()

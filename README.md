@@ -22,6 +22,33 @@ Telemeters preference to being configurable, but don't require more than
 credentials to get working. For instance, slack can be implemented with
 the following:
 
+### Exception Handling
+
+See [EXCEPTIONS.md](./docs/EXCEPTIONS.md).
+
+```python
+from telemetry import PagerDutyTelemeter
+
+meter = PagerDutyTelemeter()
+
+@meter.catch("your_failure_name")
+def some_function():
+    raise Exception("This is a test exception")
+
+```
+
+### Metrics
+
+```python
+# STATSD_HOST=localhost
+from telemetry import StatsdTelemeter
+
+meter = StatsdTelemeter()  # config in environment, or as arg
+meter.incr("telemetry.metric.example")
+```
+
+### Logging 
+
 ```SLACK_ROOM_ID=Txxx/Byyy/Zzzz python
 import logging
 from telemetry import SlackTelemeter
@@ -42,7 +69,7 @@ meter.message("your message!")
 
 Clients are written using core python libraries, so `telemetry` is light weight.
 
-## Python Wrapper
+## Python APM
 
 You can instantiate Telemeters by using environment variables.
 

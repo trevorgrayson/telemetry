@@ -2,9 +2,9 @@ import timeit
 
 
 class Runtime:
-    def __init__(self, report_name, meter):
+    def __init__(self, report_name, meters):
         self.report_name = report_name
-        self.meter = meter
+        self.meters = meters
 
     def __call__(self, fn):
         def wrapper_bench(*args, **kwargs):
@@ -18,7 +18,7 @@ class Runtime:
             if isinstance(report_name, type(lambda:1)):
                 report_name = self.report_name(*args, **kwargs)
 
-            # get_client().timing(report_name, elapsed)
+            self.meters.timing(report_name, elapsed)
 
             return result
 
@@ -26,7 +26,7 @@ class Runtime:
 
 
 class Catch:
-    def __init__(self, report_name, meter):
+    def __init__(self, report_name, meter, **kwargs):
         self.report_name = report_name
         self.meter = meter
 
@@ -35,7 +35,7 @@ class Catch:
             try:
                 return fn(*args, **kwargs)
             except Exception as err:
-                self.meter.message(err)
+                self.meter.message(str(err), **kwargs)
                 raise err
 
         return wrapper_catch
@@ -46,7 +46,6 @@ class Decorators:
         """wrapper method for functions"""
         return Runtime(report_name, self)
 
-    def catch(self, report_name):
+    def catch(self, report_name, **kwargs):
         """wrapper method for functions"""
-        return Catch(report_name, self)
-
+        return Catch(report_name, self, **kwargs)

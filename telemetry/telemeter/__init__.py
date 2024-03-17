@@ -1,13 +1,6 @@
 import logging
-from telemetry import decorators as decor
-
-
-class NoHandler(Exception):
-    pass
-
-
-class TelemeterConfigException(Exception):
-    pass
+from . import decorators as decor
+from .exceptions import *
 
 
 class Telemeter(decor.Decorators):

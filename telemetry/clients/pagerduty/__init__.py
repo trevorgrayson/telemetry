@@ -23,7 +23,7 @@ class PagerDutyTelemeter(logging.StreamHandler, decorators.Decorators):
         raises = kwargs.get("raises", False)
         self.routing_key = kwargs.get("routing_key", PAGERDUTY_KEY)
         self._conn = None  # lazy loading - occasional use!
-        self.source = kwargs.get("source")
+        self.source = kwargs.get("source", "telemetry")
         self.client = kwargs.get("client", "Telemetry")
         self.client_url = kwargs.get("client_url", "https://pypi.org/project/telemetry")
         if raises and not self.routing_key:
@@ -86,8 +86,8 @@ class PagerDutyTelemeter(logging.StreamHandler, decorators.Decorators):
             "payload": {
                 "summary": str(msg).split("\n\n")[0][0:1024],  # truncates
                 "source": source or self.source,
-                "severity": "error",
-                "timestamp": datetime.now().isoformat() + "+0000",
+                "severity": "error"
+                # "timestamp": datetime.now().isoformat() + "+0000",
             },
             "dedup_key": dedupe_key,
             "client": self.client,

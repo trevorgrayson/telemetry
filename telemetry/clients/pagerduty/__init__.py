@@ -49,7 +49,7 @@ class PagerDutyTelemeter(logging.StreamHandler, decorators.Decorators):
 
     def message(self, msg, **kwargs):
         self.conn.request("POST", EVENT_PATH,
-                          body=dumps(self.payload(msg), **kwargs),
+                          body=dumps(self.payload(msg, **kwargs)),
                           headers=self.headers)
         resp = self.conn.getresponse()
         if resp.status in [202]:

@@ -1,0 +1,33 @@
+Id: 0db832ab8a1946d4ae43692382b8103c
+Subject: Implement StatsD gauge parser and TCP server relay
+Tags: feature:btstats-bridge, area:server
+Status: done
+Created: 2026-04-12T05:24:43.435578+00:00
+Updated: 2026-04-12T05:32:00.898027+00:00
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============4730260615145136581=="
+
+--===============4730260615145136581==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Add StatsD gauge parsing (metric:value|g) and TCP server that accepts lines a=
+nd relays parsed gauge messages to Bluetooth sender. Acceptance: parser valid=
+ates gauge messages; server processes multiple lines per connection and ignor=
+es invalid input safely.
+
+---
+Comment (2026-04-12T05:32:00.898027+00:00)
+Implemented StatsD gauge parser and asyncio TCP server relay.
+
+--===============4730260615145136581==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Change Log:
+- 2026-04-12T05:32:00.898027+00:00 status todo -> done
+- 2026-04-12T05:32:00.898027+00:00 comment added
+
+--===============4730260615145136581==--

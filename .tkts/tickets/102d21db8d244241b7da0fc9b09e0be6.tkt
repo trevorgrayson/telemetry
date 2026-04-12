@@ -1,0 +1,33 @@
+Id: 102d21db8d244241b7da0fc9b09e0be6
+Subject: Create btstats module entrypoint and CLI skeleton
+Tags: feature:btstats-bridge, area:cli
+Status: done
+Created: 2026-04-12T05:24:41.037107+00:00
+Updated: 2026-04-12T05:31:58.933540+00:00
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5466313902137977110=="
+
+--===============5466313902137977110==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Implement a btstats Python module runnable via `python -m btstats` with CLI w=
+iring for config, scan, connect, and server start. Acceptance: module has __m=
+ain__.py and parses args without errors.
+
+---
+Comment (2026-04-12T05:31:58.933540+00:00)
+Added btstats package with __main__.py CLI supporting scan/connect/serve/show=
+-config.
+
+--===============5466313902137977110==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Change Log:
+- 2026-04-12T05:31:58.933540+00:00 status todo -> done
+- 2026-04-12T05:31:58.933540+00:00 comment added
+
+--===============5466313902137977110==--

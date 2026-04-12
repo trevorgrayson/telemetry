@@ -1,0 +1,33 @@
+Id: 725f1324e60245b2944d4949bff78d86
+Subject: Add TOML config read/write for btstats
+Tags: feature:btstats-bridge, area:config
+Status: done
+Created: 2026-04-12T05:24:48.606955+00:00
+Updated: 2026-04-12T05:32:04.940275+00:00
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5855418632980774744=="
+
+--===============5855418632980774744==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Implement config management (device address, port, characteristic UUID) using=
+ tomlkit. Acceptance: default config created if missing; updates saved when d=
+evice selected; CLI can show config path.
+
+---
+Comment (2026-04-12T05:32:04.940275+00:00)
+Added TOML config handling with defaults and persisted device/port/characteri=
+stic fields.
+
+--===============5855418632980774744==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Disposition: attachment
+
+Change Log:
+- 2026-04-12T05:32:04.940275+00:00 status todo -> done
+- 2026-04-12T05:32:04.940275+00:00 comment added
+
+--===============5855418632980774744==--
